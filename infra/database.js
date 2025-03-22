@@ -1,8 +1,8 @@
-import { Client, client } from 'pg';
+import { Client, client } from "pg";
 
 async function query(queryObject) {
   let client;
-  try { 
+  try {
     client = await getNewClient();
     const result = await client.query(queryObject);
     return result;
@@ -12,7 +12,6 @@ async function query(queryObject) {
   } finally {
     await client.end();
   }
-
 }
 
 async function getNewClient() {
@@ -31,15 +30,15 @@ async function getNewClient() {
 
 export default {
   query,
-  getNewClient
-}
+  getNewClient,
+};
 
 function getSSLValues() {
   if (process.env.POSTGRES_CA) {
     return {
-    ca: process.env.POSTGRES_CA,
+      ca: process.env.POSTGRES_CA,
     };
   }
 
   return process.env.NODE_ENV === "production" ? true : false;
-}   
+}
